@@ -4,6 +4,7 @@ const app = {
     robotSequence : [],
     userSequence : [],
     availableColors : ["red", "green", "blue","yellow"],
+    playerMessage : document.querySelector(".player-message"),
 
 // METHODS
     init () {
@@ -20,6 +21,8 @@ const app = {
         )
     },
     createRobotSequence(){
+        app.playerMessage.innerHTML="Concentrez vous et retenez l'odre d'apparition des couleurs...";
+        // app.playerMessage.visibility="visible";
         for (let i = 0; i < 4; i++) {
             let randomColor = app.availableColors[Math.floor(Math.random() * app.availableColors.length)]
             app.robotSequence.push(randomColor)

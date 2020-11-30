@@ -21,14 +21,15 @@ body {
     transform: scale(1.05);
 }
 
-.whos-playing{
+.player-message{
     color: white;
     font-size: 2em;
     text-align: center;
     font-style: italic;
     line-height: 1.5em;
     margin: 2vh;
-    visibility: hidden;
+    visibility: visible;
+
 }
 
 .game-title {
