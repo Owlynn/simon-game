@@ -1,24 +1,51 @@
 body {
     background-color: black;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.start-game {
+    height: 10vh;
+    width: fit-content;
+    margin: 5vh;
+    font-size: 2em;
+    padding: 1vw;
+}
+
+.start-game:hover{
+    background-color: rgb(199, 199, 199);
+    transform: scale(1.05);
+}
+
+.whos-playing{
+    color: white;
+    font-size: 2em;
+    text-align: center;
+    font-style: italic;
+    line-height: 1.5em;
+    margin: 2vh;
+    visibility: hidden;
 }
 
 .game-title {
     color: white;
-    text-align: center;
     font-size: 8em;
     font-family: 'Major Mono Display', monospace;
     margin: auto;
 }
 
+.game-area-container{
+    padding:2vh ;
+}
 .game-area {
     display: flex;
     width: 500px;
     flex-direction: row;
     flex-wrap: wrap;
-    padding-top:20vh;
-    margin: auto;
-    align-items: center;
 }
 
 .trigger {
@@ -53,9 +80,6 @@ body {
     border-left: solid rgb(54, 53, 53) 5px;
 }
 
-.game-area:hover{
-    transform: scale(1.08);
-}
 .trigger--active{
     transform: scale(1.08);
 }
