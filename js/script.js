@@ -8,7 +8,7 @@ const app = {
 
 // METHODS
     init () {
-        console.log("Youpi");
+        console.log("init ok");
         app.activateTriggers();
         app.clearSequences() 
     },
@@ -23,19 +23,29 @@ const app = {
     createRobotSequence(){
         app.playerMessage.innerHTML="Concentrez vous et retenez l'odre d'apparition des couleurs...";
         app.playerMessage.style.visibility="visible";
+
+        // chooses 4 random colors and puts it into an array
+
             for (let i = 0; i < 4; i++) {
                 let randomColor = app.availableColors[Math.floor(Math.random() * app.availableColors.length)]
                 app.robotSequence.push(randomColor)
             }
-        console.log(app.robotSequence);
-        // app.createUserSequence();
+
+            console.log("tableau de random " + app.robotSequence);
+
+            app.robotSequence.forEach((e) => {
+                // console.log("forEach current e " + e);
+                document.querySelector("." + e).classList.add(e + ("--active"))
+
+                    setTimeout(
+                        function() {
+                            document.querySelector("." + e).classList.remove(e + "--active");
+                        }
+                        ,3000
+                    );
+            };
     },
-    // createUserSequence(event){
-    //    app.playerMessage.innerHTML="C'est à votre tour !";
-    //    let currentTrigger = event.target;
-    //    app.userSequence.push(currentTrigger.classList[1])
-    //    console.log(app.robotSequence);
-    // },
+
     clearSequences() {
         app.robotSequence = []
         app.userSequence = []
@@ -44,3 +54,10 @@ const app = {
 };
 
 document.addEventListener('DOMContentLoaded', app.init);
+
+// createUserSequence(event){
+//    app.playerMessage.innerHTML="C'est à votre tour !";
+//    let currentTrigger = event.target;
+//    app.userSequence.push(currentTrigger.classList[1])
+//    console.log(app.robotSequence);
+// },

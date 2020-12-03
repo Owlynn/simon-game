@@ -81,12 +81,8 @@ body {
     border-left: solid rgb(54, 53, 53) 5px;
 }
 
-.trigger--active{
-    transform: scale(1.08);
-}
 .red:hover, .red--active {
     background-color: red;
-    
 }
 .blue:hover , .blue--active{
     background-color: rgb(0, 60, 255);
