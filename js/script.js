@@ -25,7 +25,7 @@ const app = {
         app.playerMessage.innerHTML="Concentrez vous et retenez l'odre d'apparition des couleurs...";
         app.playerMessage.style.visibility="visible";
     
-        // chooses 4 random colors and puts it into an array
+        // chooses random colors and puts it into an array
     
             for (let i = 0; i < 4; i++) {
                 let randomColor = app.availableColors[Math.floor(Math.random() * app.availableColors.length)];
@@ -34,38 +34,30 @@ const app = {
 
     
             console.log("tableau de random " + app.robotSequence);
-    
-            // app.robotSequence.forEach( (currentColor) => {
-            //     document.querySelector("." + currentColor).classList.add(currentColor + ("--active"));
-            
-            //     setTimeout(
-                //         function() {
-                    //             document.querySelector("." + currentColor).classList.remove(currentColor + "--active");
-                    //         }
-                    //         ,3000
-                    //     );
-                    // });
 
         let currentIndex = 0;
-        // let currentColor = app.robotSequence[currentIndex];
-        console.log({currentIndex});
         console.log("couleur en cours : "+app.robotSequence[currentIndex]);
         
-        setInterval(() => {
-                document.querySelector("." + app.robotSequence[currentIndex]).classList.add(app.robotSequence[currentIndex] + ("--active"));
-                console.log("j'active la couleur : " + app.robotSequence[currentIndex]);
-            }, 3000
-            );
+        setInterval(
+            function () {
+                if (currentIndex < app.maxColors) {
+                    console.log({currentIndex});
+                    document.querySelector("." + app.robotSequence[currentIndex]).classList.add(app.robotSequence[currentIndex] + ("--active"));
+                    console.log("j'active la couleur : " + app.robotSequence[currentIndex]);
+                }
+            }, 1000
+        );
             
-            setInterval(
-                function() {
-                    document.querySelector("." + app.robotSequence[currentIndex]).classList.remove(app.robotSequence[currentIndex] + "--active");
+        setInterval(
+            function() {
+                if (currentIndex < app.maxColors) {
+                    document.querySelector("." + app.robotSequence[currentIndex]).classList.toggle(app.robotSequence[currentIndex] + "--active");
                     console.log("je désactive la couleur : " + app.robotSequence[currentIndex]);
                     currentIndex++
                 }
-                ,4000
-                );       
-                
+            }
+            , 1100
+        );       
     },
 
     clearSequences() {
