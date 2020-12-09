@@ -8,20 +8,30 @@ body {
     
 }
 
-.start-game {
+.start-game  {
     height: 10vh;
     width: fit-content;
     margin: 5vh;
     font-size: 2em;
-    padding: 1vw;
+    padding: 2vw;
+    border-radius: 100%;
 }
 
+.level-up {
+    height: 10vh;
+    width: fit-content;
+    margin: 5vh;
+    font-size: 2em;
+    padding: 2vw;
+    border-radius: 100%;
+    display: none;
+}
 .start-game:hover{
     background-color: rgb(199, 199, 199);
     transform: scale(1.05);
 }
 
-.player-message, .player-message-2{
+.player-message, .player-message-2 {
     color: white;
     font-size: 2em;
     text-align: center;
@@ -31,6 +41,14 @@ body {
     display: none;
 }
 
+.level{
+    color: white;
+    font-size: 3em;
+    text-align: center;
+    font-style: italic;
+    line-height: 1.5em;
+    margin: 6vh;
+}
 .game-title {
     color: white;
     font-size: 8em;
