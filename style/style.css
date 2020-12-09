@@ -21,15 +21,14 @@ body {
     transform: scale(1.05);
 }
 
-.player-message{
+.player-message, .player-message-2{
     color: white;
     font-size: 2em;
     text-align: center;
     font-style: italic;
     line-height: 1.5em;
     margin: 2vh;
-    visibility: hidden;
-
+    display: none;
 }
 
 .game-title {
