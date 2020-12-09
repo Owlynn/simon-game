@@ -21,7 +21,7 @@ const app = {
     },
     
     startGame (){
-        app.clearSequences();
+        // app.clearSequences();
         app.startButton.addEventListener("click", app.createRobotSequence)
         app.level.innerHTML = "Niveau 1"
     },
@@ -102,7 +102,10 @@ const app = {
         if(robotString != userString){
             app.playerMessage1.innerHTML = "C'est perdu !";
             app.startButton.style.display = "block";
+            app.clearSequences();
             app.startButton.onclick = app.startGame;
+            app.maxColors = 4;
+            app.currentLevel = 1;
         }
     },
     levelUp (){
@@ -116,6 +119,7 @@ const app = {
     clearSequences() {
         app.robotSequence = [];
         app.userSequence = [];
+        
     }
 };
 
