@@ -1,6 +1,8 @@
+* {
+    box-sizing: border-box;
+}
 body {
     background-color: black;
-    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -9,12 +11,15 @@ body {
 }
 
 .start-game  {
-    height: 10vh;
-    width: fit-content;
+    min-height: 15vh;
     margin: 5vh;
     font-size: 2em;
-    padding: 2vw;
     border-radius: 100%;
+}
+
+.start-game-text {
+    padding: 2vw;
+    text-align: center;
 }
 
 .level-up {
@@ -61,7 +66,7 @@ body {
 }
 .game-area {
     display: flex;
-    width: 500px;
+    width: 400px;
     flex-direction: row;
     flex-wrap: wrap;
 }
