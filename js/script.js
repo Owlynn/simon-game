@@ -11,25 +11,26 @@ const app = {
     currentLevel:1,
     maxColors : 4,
     
-    // METHODS
+// METHODS
     init () {
-        console.log("init ok");
         app.startGame();
     },
     startGame (){
-        app.startButton.addEventListener("click", app.createRobotSequence)
-        app.level.innerHTML = "Niveau 1"
+        app.startButton.addEventListener("click", app.createRobotSequence);
+        app.level.innerHTML = "Niveau 1";
     },
     createRobotSequence() {
-        app.playerMessage1.innerHTML="Concentrez vous et retenez l'odre d'apparition des couleurs...";
-        app.playerMessage1.style.display = "block"
+        app.playerMessage1.innerHTML = "Concentrez vous et retenez l'odre d'apparition des couleurs...";
+        app.playerMessage1.style.display = "block";
         app.startButton.style.display = "none";
         app.levelUpButton.style.display = "none";
+
         // chooses random colors and puts it into an array
         for (let i = 0; i < app.maxColors; i++) {
             let randomColor = app.availableColors[Math.floor(Math.random() * app.availableColors.length)];
             app.robotSequence.push(randomColor);
         }
+        // changes the colors of the triggers at specified intervals.
         let currentIndex = 0;
         let activateClass = setInterval(
             () => {
