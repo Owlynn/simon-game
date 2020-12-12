@@ -10,6 +10,7 @@ const app = {
     level: document.querySelector(".level"),
     currentLevel:1,
     maxColors : 4,
+    allTriggers: document.querySelectorAll(".trigger"),
     
 // METHODS
     init () {
@@ -24,12 +25,13 @@ const app = {
         app.playerMessage1.style.display = "block";
         app.startButton.style.display = "none";
         app.levelUpButton.style.display = "none";
-
+        
         // chooses random colors and puts it into an array
         for (let i = 0; i < app.maxColors; i++) {
             let randomColor = app.availableColors[Math.floor(Math.random() * app.availableColors.length)];
             app.robotSequence.push(randomColor);
         }
+        console.log(app.robotSequence);
         // changes the colors of the triggers at specified intervals.
         let currentIndex = 0;
         let activateClass = setInterval(
@@ -50,15 +52,25 @@ const app = {
                     currentIndex++;
                 }
                 if (currentIndex > app.maxColors-1) {
-                    document.querySelectorAll(".trigger").forEach(trigger => {
-                    trigger.addEventListener("mousedown", app.createUserSequence)                        
+                    app.allTriggers.forEach((colorTrigger) => {
+                        colorTrigger.addEventListener("mousedown", app.createUserSequence)                        
+                        colorTrigger.addEventListener("mouseover", app.handleMouseover)                        
+                        colorTrigger.addEventListener("mouseleave", app.handleMouseleave)                        
                     });
                     app.playerMessage1.innerHTML = "C'est à votre tour ! Reproduisez la séquence de couleurs"
                     clearInterval(deactivateClass);
                 }
             }
             , 1100
-        );
+            );
+        },
+        handleMouseover (event) {
+            console.log('mouse over');
+            event.target.classList.add(event.target.classList[1]+ "--active")
+        },
+        handleMouseleave (event) {
+            console.log('mouse leave');
+            event.target.classList.remove(event.target.classList[2]);
     },
     createUserSequence(event){
         let currentTrigger = event.target;
