@@ -1,6 +1,8 @@
-body {
-    background-color: black;
+* {
     box-sizing: border-box;
+}
+body {
+    background-color: rgb(0, 0, 0);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -8,46 +10,40 @@ body {
     
 }
 
-.start-game  {
-    height: 10vh;
-    width: fit-content;
-    margin: 5vh;
-    font-size: 2em;
-    padding: 2vw;
-    border-radius: 100%;
-}
-
-.level-up {
-    height: 10vh;
-    width: fit-content;
-    margin: 5vh;
-    font-size: 2em;
-    padding: 2vw;
-    border-radius: 100%;
-    display: none;
-}
-.start-game:hover{
-    background-color: rgb(199, 199, 199);
-    transform: scale(1.05);
-}
-
 .player-message, .player-message-2 {
+    font-family: 'Padauk', sans-serif;
     color: white;
-    font-size: 2em;
+    font-size: 1.7em;
     text-align: center;
     font-style: italic;
     line-height: 1.5em;
-    margin: 2vh;
+    margin: 0.5vh;
+    display: none;
+}
+
+.start-game, .level-up {
+    min-height: 15vh;
+    margin: 3vh;
+    font-size: 2.5em;
+    border-radius: 100%;
+}
+
+.start-game-text {
+    font-family: 'Padauk', sans-serif;
+    padding: 2vw;
+    text-align: center;
+}
+
+.level-up {
     display: none;
 }
 
 .level{
+    font-family: 'Padauk', sans-serif;
     color: white;
-    font-size: 3em;
+    font-size: 4em;
     text-align: center;
-    font-style: italic;
     line-height: 1.5em;
-    margin: 6vh;
 }
 .game-title {
     color: white;
@@ -61,7 +57,7 @@ body {
 }
 .game-area {
     display: flex;
-    width: 500px;
+    width: 400px;
     flex-direction: row;
     flex-wrap: wrap;
 }
@@ -98,17 +94,17 @@ body {
     border-left: solid rgb(54, 53, 53) 5px;
 }
 
-.red:hover, .red--active {
+.red--active {
     background-color: red;
 }
-.blue:hover , .blue--active{
+.blue--active{
     background-color: rgb(0, 60, 255);
 }
 
-.green:hover, .green--active {
+.green--active {
     background-color: rgb(6, 218, 6);
 }
 
-.yellow:hover , .yellow--active{
+.yellow--active{
     background-color: yellow;
 }
