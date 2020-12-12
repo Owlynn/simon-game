@@ -61,16 +61,15 @@ const app = {
             , 1100
             );
         },
-        finishSequence(){
-            app.updateDOM("C'est à votre tour ! Reproduisez la séquence de couleurs");
-            app.allTriggers.forEach((colorTrigger) => {
-                colorTrigger.addEventListener("mousedown", app.createUserSequence);  
-                colorTrigger.addEventListener("mouseleave", app.handleMouseleave);                      
-                colorTrigger.addEventListener("mouseover", app.handleMouseover);   
-            });
-            clearInterval(app.activateClass);
-            clearInterval(app.deactivateClass);
-
+    finishSequence(){
+        app.updateDOM("C'est à votre tour ! Reproduisez la séquence de couleurs");
+        app.allTriggers.forEach((colorTrigger) => {
+            colorTrigger.addEventListener("mousedown", app.createUserSequence);  
+            colorTrigger.addEventListener("mouseleave", app.handleMouseleave);                      
+            colorTrigger.addEventListener("mouseover", app.handleMouseover);   
+        });
+        clearInterval(app.activateClass);
+        clearInterval(app.deactivateClass);
     },
     updateDOM(playerMessage, messageDisplay, buttonDisplay,levelDisplay){
         app.playerMessage.innerHTML = playerMessage;
@@ -81,7 +80,7 @@ const app = {
     createUserSequence(event){
         let currentTrigger = event.target; 
         if (app.userSequence.length < app.maxColors ) {
-                app.userSequence.push(currentTrigger.dataset.color);
+            app.userSequence.push(currentTrigger.dataset.color);
         }
         if(app.userSequence.length == app.maxColors){
             app.checkIfRight();
@@ -92,6 +91,7 @@ const app = {
         app.allTriggers.forEach((colorTrigger) => {
             console.log("remove listeners foreach");
             colorTrigger.removeEventListener("mouseover", app.handleMouseover);                    
+            colorTrigger.removeEventListener("mousedown", app.createUserSequence);  
             colorTrigger.removeEventListener("mouseleave", app.handleMouseleave);
             colorTrigger.className = "trigger " + colorTrigger.dataset.color;                       
         });
@@ -115,7 +115,6 @@ const app = {
         } 
         if(robotString != userString){
             app.clearSequences();
-            // updateDOM(playerMessage, messageDisplay, buttonDisplay,levelDisplay)
             app.updateDOM("Pas de chance, vous avez perdu !", "block", "block","none");
             app.startButton.onclick = app.startGame;
             app.startButton.innerHTML = "Recommencer une partie";
