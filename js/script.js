@@ -11,6 +11,9 @@ const app = {
     currentLevel:1,
     maxColors : 4,
     allTriggers: document.querySelectorAll(".trigger"),
+    currentIndex:0,
+    activateClass: null,
+    deactivateClass: null,
     
     // METHODS
     init () {
@@ -21,8 +24,7 @@ const app = {
         app.level.innerHTML = "Niveau 1";
     },
     createRobotSequence() {
-        app.updateDOM("Concentrez vous et retenez l'odre d'apparition des couleurs...", "block","none","none");
-
+        
         // chooses random colors and puts it into an array
         for (let i = 0; i < app.maxColors; i++) {
             let randomColor = app.availableColors[Math.floor(Math.random() * app.availableColors.length)];
@@ -33,37 +35,42 @@ const app = {
         
     },
     displayRobotSequence() {
-    // changes the colors of the triggers at specified intervals.
-    let currentIndex = 0;
-    let activateClass = setInterval(
-        () => {
-            if (currentIndex < app.maxColors) {
-                document.querySelector("." + app.robotSequence[currentIndex]).classList.add(app.robotSequence[currentIndex] + ("--active"));
+        app.updateDOM("Concentrez vous et retenez l'odre d'apparition des couleurs...", "block","none","none");
+        
+        app.currentIndex = 0;
+        
+        app.activateClass = setInterval(
+            () => {
+                if (app.currentIndex < app.maxColors) {
+                    document.querySelector("." + app.robotSequence[app.currentIndex]).classList.add(app.robotSequence[app.currentIndex] + ("--active"));
+                }
             }
-            if (currentIndex > app.maxColors-1) {
-                clearInterval(activateClass);
-            }
-        }
-        , 1000
+            , 1000
         );
-    let deactivateClass = setInterval(
-        function() {
-            if (currentIndex < app.maxColors) {
-                document.querySelector("." + app.robotSequence[currentIndex]).classList.toggle(app.robotSequence[currentIndex] + "--active");
-                currentIndex++;
+        
+        app.deactivateClass = setInterval(
+            () => {
+                if (app.currentIndex < app.maxColors) {
+                    document.querySelector("." + app.robotSequence[app.currentIndex]).classList.toggle(app.robotSequence[app.currentIndex] + "--active");
+                    app.currentIndex++;
+                }
+                if (app.currentIndex > app.maxColors-1) {
+                    app.finishSequence();
+                }
             }
-            if (currentIndex > app.maxColors-1) {
-                app.allTriggers.forEach((colorTrigger) => {
-                    colorTrigger.addEventListener("mousedown", app.createUserSequence);  
-                    colorTrigger.addEventListener("mouseleave", app.handleMouseleave);                      
-                    colorTrigger.addEventListener("mouseover", app.handleMouseover);   
-                });
-                app.updateDOM("C'est à votre tour ! Reproduisez la séquence de couleurs");
-                clearInterval(deactivateClass);
-            }
-        }
-        , 1100
-        );
+            , 1100
+            );
+        },
+        finishSequence(){
+            app.updateDOM("C'est à votre tour ! Reproduisez la séquence de couleurs");
+            app.allTriggers.forEach((colorTrigger) => {
+                colorTrigger.addEventListener("mousedown", app.createUserSequence);  
+                colorTrigger.addEventListener("mouseleave", app.handleMouseleave);                      
+                colorTrigger.addEventListener("mouseover", app.handleMouseover);   
+            });
+            clearInterval(app.activateClass);
+            clearInterval(app.deactivateClass);
+
     },
     updateDOM(playerMessage, messageDisplay, buttonDisplay,levelDisplay){
         app.playerMessage.innerHTML = playerMessage;
@@ -103,15 +110,13 @@ const app = {
         let userString = app.userSequence.toString();
         
         if(robotString == userString ) {
-            app.updateDOM("Bravo, vous avez gagné","block","none","block");
-            // app.levelUpButton.style.display = "block";
+            app.updateDOM("Bravo, vous avez gagné !","block","none","block");
             app.levelUpButton.onclick = app.levelUp;
         } 
         if(robotString != userString){
             app.clearSequences();
             // updateDOM(playerMessage, messageDisplay, buttonDisplay,levelDisplay)
-            app.updateDOM("Pas de chance, vous vez perdu !", "block", "block","none");
-            // app.startButton.style.display = "block";
+            app.updateDOM("Pas de chance, vous avez perdu !", "block", "block","none");
             app.startButton.onclick = app.startGame;
             app.startButton.innerHTML = "Recommencer une partie";
             app.maxColors = 4;

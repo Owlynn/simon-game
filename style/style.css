@@ -11,6 +11,7 @@ body {
 }
 
 .player-message, .player-message-2 {
+    font-family: 'Padauk', sans-serif;
     color: white;
     font-size: 2em;
     text-align: center;
@@ -23,11 +24,12 @@ body {
 .start-game, .level-up {
     min-height: 15vh;
     margin: 5vh;
-    font-size: 2em;
+    font-size: 2.5em;
     border-radius: 100%;
 }
 
 .start-game-text {
+    font-family: 'Padauk', sans-serif;
     padding: 2vw;
     text-align: center;
 }
@@ -37,12 +39,12 @@ body {
 }
 
 .level{
+    font-family: 'Padauk', sans-serif;
     color: white;
     font-size: 3em;
     text-align: center;
-    font-style: italic;
     line-height: 1.5em;
-    margin: 6vh;
+    margin-top: 3vh;
 }
 .game-title {
     color: white;
