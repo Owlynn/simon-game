@@ -19,15 +19,10 @@ const app = {
     startGame (){
         app.startButton.addEventListener("click", app.createRobotSequence);
         app.level.innerHTML = "Niveau 1";
-        // app.removeListeners();
     },
     createRobotSequence() {
-        
-        app.playerMessage.innerHTML = "Concentrez vous et retenez l'odre d'apparition des couleurs...";
-        app.playerMessage.style.display = "block";
-        app.startButton.style.display = "none";
-        app.levelUpButton.style.display = "none";
-        
+        app.updateDOM("Concentrez vous et retenez l'odre d'apparition des couleurs...", "block","none","none");
+
         // chooses random colors and puts it into an array
         for (let i = 0; i < app.maxColors; i++) {
             let randomColor = app.availableColors[Math.floor(Math.random() * app.availableColors.length)];
@@ -59,18 +54,23 @@ const app = {
                         colorTrigger.addEventListener("mouseleave", app.handleMouseleave);                      
                         colorTrigger.addEventListener("mouseover", app.handleMouseover);   
                     });
-                    app.playerMessage.innerHTML = "C'est à votre tour ! Reproduisez la séquence de couleurs"
+                    app.updateDOM("C'est à votre tour ! Reproduisez la séquence de couleurs");
                     clearInterval(deactivateClass);
                 }
             }
             , 1100
             );
-        },
-        createUserSequence(event){
-            
+    },
+    updateDOM(playerMessage, messageDisplay, buttonDisplay,levelDisplay){
+        app.playerMessage.innerHTML = playerMessage;
+        app.playerMessage.style.display = messageDisplay;
+        app.startButton.style.display = buttonDisplay;
+        app.levelUpButton.style.display = levelDisplay;
+    },
+    createUserSequence(event){
         let currentTrigger = event.target; 
         if (app.userSequence.length < app.maxColors ) {
-                app.userSequence.push(currentTrigger.dataset.color)
+                app.userSequence.push(currentTrigger.dataset.color);
         }
         if(app.userSequence.length == app.maxColors){
             app.checkIfRight();
@@ -86,7 +86,7 @@ const app = {
         });
     },
     handleMouseover (event) {
-        event.target.classList.add(event.target.dataset.color + "--active")
+        event.target.classList.add(event.target.dataset.color + "--active");
     },
     handleMouseleave (event) {
         event.target.classList.remove(event.target.classList[2]);
@@ -99,14 +99,15 @@ const app = {
         let userString = app.userSequence.toString();
         
         if(robotString == userString ) {
-            app.playerMessage.innerHTML = "Bravo vous avez gagné !";
-            app.levelUpButton.style.display = "block";
+            app.updateDOM("Bravo, vous avez gagné","block","none","block");
+            // app.levelUpButton.style.display = "block";
             app.levelUpButton.onclick = app.levelUp;
         } 
         if(robotString != userString){
             app.clearSequences();
-            app.playerMessage.innerHTML = "C'est perdu !";
-            app.startButton.style.display = "block";
+            // updateDOM(playerMessage, messageDisplay, buttonDisplay,levelDisplay)
+            app.updateDOM("Pas de chance, vous vez perdu !", "block", "block","none");
+            // app.startButton.style.display = "block";
             app.startButton.onclick = app.startGame;
             app.startButton.innerHTML = "Recommencer une partie";
             app.maxColors = 4;
@@ -114,6 +115,7 @@ const app = {
         }
     },
     levelUp (){
+        console.log("levelup");
         app.maxColors ++;
         app.currentLevel++;
         app.level.innerHTML = "Niveau " + app.currentLevel;
