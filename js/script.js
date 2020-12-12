@@ -29,37 +29,41 @@ const app = {
             app.robotSequence.push(randomColor);
         }
         console.log(app.robotSequence);
-        // changes the colors of the triggers at specified intervals.
-        let currentIndex = 0;
-        let activateClass = setInterval(
-            () => {
-                if (currentIndex < app.maxColors) {
-                    document.querySelector("." + app.robotSequence[currentIndex]).classList.add(app.robotSequence[currentIndex] + ("--active"));
-                }
-                if (currentIndex > app.maxColors-1) {
-                    clearInterval(activateClass);
-                }
+        app.displayRobotSequence();
+        
+    },
+    displayRobotSequence() {
+    // changes the colors of the triggers at specified intervals.
+    let currentIndex = 0;
+    let activateClass = setInterval(
+        () => {
+            if (currentIndex < app.maxColors) {
+                document.querySelector("." + app.robotSequence[currentIndex]).classList.add(app.robotSequence[currentIndex] + ("--active"));
             }
-            , 1000
-            );
-        let deactivateClass = setInterval(
-            function() {
-                if (currentIndex < app.maxColors) {
-                    document.querySelector("." + app.robotSequence[currentIndex]).classList.toggle(app.robotSequence[currentIndex] + "--active");
-                    currentIndex++;
-                }
-                if (currentIndex > app.maxColors-1) {
-                    app.allTriggers.forEach((colorTrigger) => {
-                        colorTrigger.addEventListener("mousedown", app.createUserSequence);  
-                        colorTrigger.addEventListener("mouseleave", app.handleMouseleave);                      
-                        colorTrigger.addEventListener("mouseover", app.handleMouseover);   
-                    });
-                    app.updateDOM("C'est à votre tour ! Reproduisez la séquence de couleurs");
-                    clearInterval(deactivateClass);
-                }
+            if (currentIndex > app.maxColors-1) {
+                clearInterval(activateClass);
             }
-            , 1100
-            );
+        }
+        , 1000
+        );
+    let deactivateClass = setInterval(
+        function() {
+            if (currentIndex < app.maxColors) {
+                document.querySelector("." + app.robotSequence[currentIndex]).classList.toggle(app.robotSequence[currentIndex] + "--active");
+                currentIndex++;
+            }
+            if (currentIndex > app.maxColors-1) {
+                app.allTriggers.forEach((colorTrigger) => {
+                    colorTrigger.addEventListener("mousedown", app.createUserSequence);  
+                    colorTrigger.addEventListener("mouseleave", app.handleMouseleave);                      
+                    colorTrigger.addEventListener("mouseover", app.handleMouseover);   
+                });
+                app.updateDOM("C'est à votre tour ! Reproduisez la séquence de couleurs");
+                clearInterval(deactivateClass);
+            }
+        }
+        , 1100
+        );
     },
     updateDOM(playerMessage, messageDisplay, buttonDisplay,levelDisplay){
         app.playerMessage.innerHTML = playerMessage;
