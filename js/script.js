@@ -14,33 +14,23 @@ const app = {
     // METHODS
     init () {
         console.log("init ok");
-        // app.createUserSequence();
-        // app.clearSequences() 
         app.startGame();
-        
     },
-    
     startGame (){
-        // app.clearSequences();
         app.startButton.addEventListener("click", app.createRobotSequence)
         app.level.innerHTML = "Niveau 1"
     },
     createRobotSequence() {
-        
         app.playerMessage1.innerHTML="Concentrez vous et retenez l'odre d'apparition des couleurs...";
         app.playerMessage1.style.display = "block"
         app.startButton.style.display = "none";
         app.levelUpButton.style.display = "none";
-        
         // chooses random colors and puts it into an array
         for (let i = 0; i < app.maxColors; i++) {
             let randomColor = app.availableColors[Math.floor(Math.random() * app.availableColors.length)];
             app.robotSequence.push(randomColor);
         }
-        console.log(app.robotSequence);
-        
         let currentIndex = 0;
-        
         let activateClass = setInterval(
             () => {
                 if (currentIndex < app.maxColors) {
@@ -52,7 +42,6 @@ const app = {
             }
             , 1000
         );
-            
         let deactivateClass = setInterval(
             function() {
                 if (currentIndex < app.maxColors) {
@@ -63,32 +52,23 @@ const app = {
                     document.querySelectorAll(".trigger").forEach(trigger => {
                     trigger.addEventListener("mousedown", app.createUserSequence)                        
                     });
-                    // document.addEventListener("mousedown",app.createUserSequence)
                     app.playerMessage1.innerHTML = "C'est à votre tour ! Reproduisez la séquence de couleurs"
                     clearInterval(deactivateClass);
                 }
             }
             , 1100
         );
-                
     },
-            
     createUserSequence(event){
         let currentTrigger = event.target;
-        console.log("longueur: " + app.userSequence.length);
-        console.log("max colors " + app.maxColors);
-        
         if (app.userSequence.length < app.maxColors ) {
             if (currentTrigger.classList[1] !== undefined) {
-                console.log("length inférieur à max colors et classlist existe");
                 app.userSequence.push(currentTrigger.classList[1])
             }
         }
         if(app.userSequence.length == app.maxColors){
-            console.log("length supérieur à max colors");
             app.checkIfRight();
         }
-        console.log("usersequence " + app.userSequence);
     },
     checkIfRight() {
         let robotString = app.robotSequence.toString();
@@ -112,14 +92,12 @@ const app = {
         app.maxColors ++;
         app.currentLevel++;
         app.level.innerHTML = "Niveau " + app.currentLevel;
-        console.log("max colors " + app.maxColors);
         app.clearSequences();
         app.createRobotSequence();
     },
     clearSequences() {
         app.robotSequence = [];
         app.userSequence = [];
-        
     }
 };
 
