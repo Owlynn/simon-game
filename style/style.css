@@ -2,7 +2,7 @@
     box-sizing: border-box;
 }
 body {
-    background-color: black;
+    background-color: rgb(0, 0, 0);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -13,17 +13,17 @@ body {
 .player-message, .player-message-2 {
     font-family: 'Padauk', sans-serif;
     color: white;
-    font-size: 2em;
+    font-size: 1.7em;
     text-align: center;
     font-style: italic;
     line-height: 1.5em;
-    margin: 2vh;
+    margin: 0.5vh;
     display: none;
 }
 
 .start-game, .level-up {
     min-height: 15vh;
-    margin: 5vh;
+    margin: 3vh;
     font-size: 2.5em;
     border-radius: 100%;
 }
@@ -41,10 +41,9 @@ body {
 .level{
     font-family: 'Padauk', sans-serif;
     color: white;
-    font-size: 3em;
+    font-size: 4em;
     text-align: center;
     line-height: 1.5em;
-    margin-top: 3vh;
 }
 .game-title {
     color: white;
