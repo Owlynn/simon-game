@@ -1,5 +1,7 @@
 # SIMONE - Jeu de mémoire
 
+🎮 [Jouer en ligne](https://simon-game-nu-roan.vercel.app/)
+
 Un jeu de mémoire classique où vous devez reproduire une séquence de couleurs qui s'allongent à chaque niveau.
 
 ## Comment jouer
