@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIMONE - Jeu de mémoire</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Padauk&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style/style.css">
+</head>
+<body>
+
+    <header>
+        <h1 class="game-title">SIMONE</h1>
+    </header>
+    <button class="start-game"><div class="start-game-text">Commencer la partie</div></button>
+    <div class="player-message"></div>
+    <button class="level-up">Niveau suivant</button>
+
+    <div class="game-area-container" id="game-area-container">
+
+        <div class="game-area" >
+            
+
+            <div class="trigger red" data-color ="red"></div>
+            <div class="trigger blue" data-color="blue"></div>
+            <div class="trigger green" data-color="green"></div>
+            <div class="trigger yellow" data-color="yellow"></div>
+
+        </div>
+        
+        <div class="level"></div>
+
+    </div>
+    
+    <script src="js/script.js"></script>
+</body>
+</html>
+
