@@ -14,10 +14,42 @@ const app = {
     currentIndex:0,
     activateClass: null,
     deactivateClass: null,
+    audioContext: null,
+    colorFrequencies: {
+        red: 261.63,    // Do
+        green: 329.63,  // Mi
+        blue: 392.00,   // Sol
+        yellow: 523.25  // Do aigu
+    },
     
     // METHODS
     init () {
+        // Initialiser le contexte audio
+        app.audioContext = new (window.AudioContext || window.webkitAudioContext)();
         app.startGame();
+    },
+    playSound(color) {
+        if (!app.audioContext) {
+            app.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        }
+        
+        const frequency = app.colorFrequencies[color];
+        if (!frequency) return;
+        
+        const oscillator = app.audioContext.createOscillator();
+        const gainNode = app.audioContext.createGain();
+        
+        oscillator.connect(gainNode);
+        gainNode.connect(app.audioContext.destination);
+        
+        oscillator.frequency.value = frequency;
+        oscillator.type = 'sine';
+        
+        gainNode.gain.setValueAtTime(0.3, app.audioContext.currentTime);
+        gainNode.gain.exponentialRampToValueAtTime(0.01, app.audioContext.currentTime + 0.25);
+        
+        oscillator.start(app.audioContext.currentTime);
+        oscillator.stop(app.audioContext.currentTime + 0.25);
     },
     startGame (){
         app.startButton.addEventListener("click", app.createRobotSequence);
@@ -42,7 +74,9 @@ const app = {
         app.activateClass = setInterval(
             () => {
                 if (app.currentIndex < app.maxColors) {
-                    document.querySelector("." + app.robotSequence[app.currentIndex]).classList.add(app.robotSequence[app.currentIndex] + ("--active"));
+                    const currentColor = app.robotSequence[app.currentIndex];
+                    document.querySelector("." + currentColor).classList.add(currentColor + ("--active"));
+                    app.playSound(currentColor);
                 }
             }
             , 1000
@@ -78,7 +112,8 @@ const app = {
         app.levelUpButton.style.display = levelDisplay;
     },
     createUserSequence(event){
-        let currentTrigger = event.target; 
+        let currentTrigger = event.target;
+        app.playSound(currentTrigger.dataset.color);
         if (app.userSequence.length < app.maxColors ) {
             app.userSequence.push(currentTrigger.dataset.color);
         }
